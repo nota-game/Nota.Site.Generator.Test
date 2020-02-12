@@ -11,14 +11,13 @@
     --footer-height: 3rem;
 
     --box-side-header-thiknes: 3rem;
-
-
-
-
 }
+
 
 @media (prefers-color-scheme: dark) {
     :root {
+        scroll-padding-top: var(--main-nav-height);
+
         --main-bg-color: #3e000c;
         --main-txt-color: #FAF0E6;
     }
