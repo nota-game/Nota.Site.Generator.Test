@@ -1,0 +1,66 @@
+﻿@using Nota.Site.Generator
+@using System.Linq
+@model Stasistium.Documents.IDocument;
+@{
+  Layout = @"base.cshtml";
+  var backReferences = string.Join("", Model.Id.Where(x=>x == '/').Select(x=> "../"));
+}
+@section Head{
+    <link rel="stylesheet" type="text/css" href="@(backReferences)css/book.css">
+}
+
+@{
+    var meta = Model.Metadata.GetValue<BookMetadata>();
+    var title = meta?.Title ?? string.Empty;
+    var chapter = meta?.Chapter;
+
+    var tableOfContents = Model.Metadata.GetValue<TableOfContents>();
+ 
+    ViewBag.Title = title;
+}
+
+@section submenue{
+    @{
+    Func<IEnumerable<TableOfContentsEntry>, Microsoft.AspNetCore.Html.IHtmlContent> WriteMenue = null;
+    WriteMenue = @<text>@{
+            var entrys = item;
+            @:<ol>
+            foreach (var entry in entrys)
+            {
+                var page = meta.Location + "/"+ entry.Page;
+                var link = System.Uri.EscapeUriString(page) + ".html#" + entry.Id.Replace(" ", "-");
+                var name = entry.Id;
+                if(string.IsNullOrWhiteSpace(name)){
+                    name = "Vorwort";
+                }
+
+                @:<li>
+                    if(page == Model.Id && (entry.Level == 1 || entry.Level == 0)){
+                        @:<a href="@(backReferences)@link" class="selected" >@name</a>
+                    }
+                    else
+                    {
+                        @:<a href="@(backReferences)@link" >@name</a>
+                    }
+                    if(entry.Sections.Count > 0){
+                        @WriteMenue(entry.Sections);
+                    }
+                @:</li>
+            }
+            @:</ol>
+        }</text>;
+
+            if(tableOfContents != null){
+                @:<nav class="outline">
+                    @WriteMenue(tableOfContents.Chapters);
+                @:</nav>
+        }  
+    }
+}
+    @RenderBody()
+
+    <nav class="pagination">
+        <a class="button disabled" style="float: left">Zurück</a>
+        <a class="button" href="#">Top</a>
+        <a class="button" style="float: right;">Weiter</a>
+    </nav>

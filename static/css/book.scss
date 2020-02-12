@@ -1,0 +1,222 @@
+@import "color.scss";
+
+:root {
+    --info-content-width: 400px;
+    --main-content-width: 560px;
+    --info-main-margin: 16px;
+    --outline-width: 320px;
+
+    --compact-width: calc(var(--info-content-width) + var(--main-content-width) + var(--info-main-margin) + var(--outline-width));
+}
+
+/**
+ * BEGIN OUTLINE
+ **/
+nav.outline {
+
+    position: sticky;
+    top: var(--main-nav-height);
+    height: calc(100vh - var(--main-nav-height));
+
+
+    border-right: var(--secondary-color) solid 3px;
+    margin-bottom: var(--main-nav-height);
+    float: left;
+    width: var(--outline-width);
+
+    background-color: var(--main-bg-color);
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+nav.outline::before {
+    clear: both;
+}
+
+nav.outline:hover {
+    overflow-y: auto;
+
+}
+
+
+// @media (max-width: 1400px) {
+//     nav.outline {
+//         display: none;
+//     }
+
+//     #viewOutline:checked~nav.outline {
+//         display: block;
+//         /* position: relative; */
+//         width: 100%;
+//         height: 100%;
+//         overflow: visible;
+//         background-color: var(--main-bg-color);
+//         z-index: 99999;
+//     }
+
+//     #viewOutline:checked~nav.outline~*:not(footer) {
+//         display: none;
+//     }
+// }
+
+// nav.outline>tree-menu {
+//     display: block;
+
+//     padding-right: 2em;
+//     margin-right: 1em;
+//     color: var(--secondary-color);
+// }
+
+nav.outline>*:last-child {
+    margin-bottom: 2em;
+}
+
+
+
+
+
+/* END OUTLINE*/
+
+main {
+    margin-left: var(--outline-width);
+    // margin-left: (100vw - var(--outline-width)) - (var(--main-content-width) + var(--info-content-width)) / 2;
+
+    &>.edit-box {
+
+        margin-left: calc((100vw - var(--outline-width) - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+        margin-right: calc((100vw - var(--outline-width) - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+
+        &>:not(aside) {
+            width: var(--main-content-width);
+        }
+
+        &>aside {
+
+            &.Undefined {
+                --box-color: magenta;
+                --header: 'ERROR';
+            }
+
+            &.Sample {
+                --box-color: #{$color-primary-0};
+                --header: 'Beispiel';
+            }
+
+            &.GameMaster {
+                --box-color: #{$color-secondary-1-0};
+                --header: 'Spielleiter';
+            }
+
+            &.Optional {
+                --box-color: #{$color-secondary-2-0};
+                --header: 'Optional';
+            }
+
+            &.Information {
+                --box-color: #{$color-complement-0};
+                --header: 'Info';
+            }
+
+
+
+            float: right;
+            width: calc(var(--info-content-width) - var(--info-main-margin) - 2px - 8px - 8px);
+            margin-left: var(--info-main-margin);
+            max-width: unset;
+
+
+            background: var(--secondary-color);
+            color: var(--secondary-inverse-color);
+
+            font-size: 1em;
+
+            margin-bottom: 1em;
+
+            position: relative;
+            display: grid;
+            grid-auto-rows: auto;
+            grid-template-columns: auto 1fr;
+            // padding: 2.5em 8px .5em 8px;
+            // overflow: visible;
+
+            border-color: var(--box-color);
+            border-style: solid;
+            border-width: 2px;
+            // border-right-width: 2px;
+            // border-bottom-width: 2px;
+            // border-top-width: 2px;
+            // border-left-width: var(--box-side-header-thiknes);
+
+            &::before {
+                content: var(--header);
+                font: 1.5em Georgia, Serif;
+                background: var(--box-color);
+                color: var(--primary-inverse-color);
+                padding: 0.67em 0.2em;
+                margin: 0;
+                margin-right: 0.2em;
+                grid-row: 1/999;
+                text-align: end;
+
+                writing-mode: vertical-rl;
+                // text-orientation: sideways-right;
+
+                transform: rotate(180deg);
+                transform-origin: center center;
+            }
+        }
+
+
+        aside~aside {
+            clear: right;
+        }
+
+
+
+
+
+    }
+}
+
+
+
+.edit-box {
+
+    border-top: transparent dashed 1px;
+    border-bottom: transparent dashed 1px;
+
+    &:hover {
+        border-top: var(--secondary-color) dashed 1px;
+        border-bottom: var(--secondary-color) dashed 1px;
+    }
+
+    >a {
+        grid-row: 1/999;
+        visibility: hidden;
+        float: left;
+        padding: 0.3em 0em;
+        text-align: end;
+
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        width: 2em !important;
+        margin: 0px;
+        margin-left: -2em;
+        margin-top: -1px /* the boarder of editbox*/;
+        position: absolute;
+
+        background-color: var(--secondary-color);
+        color: var(--secondary-inverse-color);
+
+        &::after {
+            transform: rotate(180deg);
+            content: '\270E';
+        }
+    }
+
+    &:hover>a {
+        visibility: visible;
+    }
+}
