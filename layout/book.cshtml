@@ -52,6 +52,7 @@
 
             if(tableOfContents != null){
                 @:<nav class="outline">
+                    <h1>Inhaltsverzeichniss</h1>
                     @WriteMenue(tableOfContents.Chapters);
                 @:</nav>
         }  
@@ -61,6 +62,6 @@
 
     <nav class="pagination">
         <a class="button disabled" style="float: left">Zurück</a>
-        <a class="button" href="#">Top</a>
+        <a class="button" href="#top">Top</a>
         <a class="button" style="float: right;">Weiter</a>
     </nav>
