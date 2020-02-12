@@ -1,0 +1,9 @@
+$info-content-width: 400px;
+$main-content-width: 560px;
+$info-main-margin: 16px;
+$outline-width: 320px;
+
+$safeZone: 32px;
+
+$compact-width:  $info-content-width + $main-content-width + $outline-width + $safeZone;
+$narrow-width:  $info-content-width + $main-content-width + $safeZone;

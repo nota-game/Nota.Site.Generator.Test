@@ -1,11 +1,5 @@
 @import "color.scss";
-
-$info-content-width: 400px;
-$main-content-width: 560px;
-$info-main-margin: 16px;
-$outline-width: 320px;
-
-$compact-width: $info-content-width+$main-content-width+$info-main-margin+$outline-width;
+@import "size.scss";
 
 
 :root {
@@ -16,6 +10,7 @@ $compact-width: $info-content-width+$main-content-width+$info-main-margin+$outli
 
     --compact-width: #{ $info-content-width + $main-content-width + $info-main-margin + $outline-width};
 }
+
 
 /**
  * BEGIN OUTLINE
@@ -60,10 +55,13 @@ nav.outline {
         overflow-x: unset;
         box-shadow: unset;
 
-        margin-left: calc((100vw -  var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
-        margin-right: calc((100vw -  var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2)
+        margin-left: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+        margin-right: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2)
+    }
 
-
+    @media (max-width: $narrow-width) {
+        margin-left: calc((100% - var(--main-content-width)) / 2);
+        margin-right: calc((100% - var(--main-content-width)) / 2)
     }
 }
 
@@ -126,12 +124,17 @@ main {
 
     &>.edit-box {
 
-        margin-left: calc((100vw - var(--outline-width) - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
-        margin-right: calc((100vw - var(--outline-width) - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+        margin-left: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+        margin-right: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
 
         @media (max-width: #{$compact-width}) {
-            margin-left: calc((100vw - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
-            margin-right: calc((100vw - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+            margin-left: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+            margin-right: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+        }
+
+        @media (max-width: $narrow-width) {
+            margin-left: calc((100% - var(--main-content-width)) / 2);
+            margin-right: calc((100% - var(--main-content-width)) / 2);
         }
 
         &>:not(aside) {
@@ -168,7 +171,14 @@ main {
 
 
             float: right;
-            width: calc(var(--info-content-width) - var(--info-main-margin) - 2px - 8px - 8px);
+
+            @media (max-width: $narrow-width) {
+                float: none;
+                width: var(--main-content-width);
+                margin-left: unset;
+            }
+
+            width: calc(var(--info-content-width));
             margin-left: var(--info-main-margin);
             max-width: unset;
 
