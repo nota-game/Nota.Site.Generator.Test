@@ -1,12 +1,20 @@
 @import "color.scss";
 
+$info-content-width: 400px;
+$main-content-width: 560px;
+$info-main-margin: 16px;
+$outline-width: 320px;
+
+$compact-width: $info-content-width+$main-content-width+$info-main-margin+$outline-width;
+
+
 :root {
     --info-content-width: 400px;
     --main-content-width: 560px;
     --info-main-margin: 16px;
     --outline-width: 320px;
 
-    --compact-width: calc(var(--info-content-width) + var(--main-content-width) + var(--info-main-margin) + var(--outline-width));
+    --compact-width: #{ $info-content-width + $main-content-width + $info-main-margin + $outline-width};
 }
 
 /**
@@ -15,6 +23,9 @@
 nav.outline {
 
     position: sticky;
+
+
+
     top: var(--main-nav-height);
     height: calc(100vh - var(--main-nav-height));
 
@@ -29,6 +40,31 @@ nav.outline {
     overflow-y: hidden;
     overflow-x: hidden;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+
+    @media (max-width: #{$compact-width}) {
+        position: static;
+        float: unset;
+
+        top: unset;
+        height: unset;
+
+
+        border-right: unset;
+        margin-bottom: unset;
+        width: unset;
+
+        background-color: unset;
+
+        overflow-y: unset;
+        overflow-x: unset;
+        box-shadow: unset;
+
+        margin-left: calc((100vw -  var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+        margin-right: calc((100vw -  var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2)
+
+
+    }
 }
 
 nav.outline::before {
@@ -81,12 +117,22 @@ nav.outline>*:last-child {
 
 main {
     margin-left: var(--outline-width);
+
+    @media (max-width: #{$compact-width}) {
+        margin-left: unset;
+    }
+
     // margin-left: (100vw - var(--outline-width)) - (var(--main-content-width) + var(--info-content-width)) / 2;
 
     &>.edit-box {
 
         margin-left: calc((100vw - var(--outline-width) - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
         margin-right: calc((100vw - var(--outline-width) - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+
+        @media (max-width: #{$compact-width}) {
+            margin-left: calc((100vw - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+            margin-right: calc((100vw - var(--main-content-width) - var(--info-main-margin) - var(--info-content-width)) / 2);
+        }
 
         &>:not(aside) {
             width: var(--main-content-width);
@@ -201,10 +247,12 @@ main {
 
         writing-mode: vertical-rl;
         transform: rotate(180deg);
-        width: 2em !important;
+        width: 2rem !important;
         margin: 0px;
-        margin-left: -2em;
-        margin-top: -1px /* the boarder of editbox*/;
+        margin-left: -2rem;
+        margin-top: -1px
+            /* the boarder of editbox*/
+        ;
         position: absolute;
 
         background-color: var(--secondary-color);
