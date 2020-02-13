@@ -1,3 +1,6 @@
 out/
 _gitView/
 gitOut/
+
+# this repo is already in the index. So ignoring it will no longer polut history with temporary changes.
+remoteGit/target
