@@ -2,5 +2,9 @@ out/
 _gitView/
 gitOut/
 
+# Temporary folders
+Cache/
+Temp/
+
 # this repo is already in the index. So ignoring it will no longer polut history with temporary changes.
 remoteGit/target
