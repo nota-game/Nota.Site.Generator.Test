@@ -10,12 +10,14 @@ $currentLocation =  Get-Location;
 Set-Location '_gitView/content'
 git add .
 git commit -m '...'
+git push
 git push --tags
 Set-Location $currentLocation
 
 Set-Location '_gitView/schema'
 git add .
 git commit -m '...'
+git push 
 git push --tags
 Set-Location $currentLocation
 
