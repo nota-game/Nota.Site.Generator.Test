@@ -12,7 +12,7 @@
 @{
     var meta = Model.Metadata.GetValue<BookMetadata>();
     var title = meta?.Title ?? string.Empty;
-    var chapter = meta?.Chapter;
+    
 
     var tableOfContents = Model.Metadata.GetValue<TableOfContents>();
  
@@ -50,12 +50,33 @@
             @:</ol>
         }</text>;
 
-            if(tableOfContents != null){
-                @:<nav class="outline">
-                    <h1>Inhaltsverzeichniss</h1>
-                    @WriteMenue(tableOfContents.Chapters);
-                @:</nav>
+        @:<nav class="outline">
+
+var siteData = Model.Metadata.TryGetValue<SiteMetadata>();
+    var versions = siteData.Books.Where(x=>x.Title == meta.Title );
+if(versions.Any()){
+
+
+
+    @:<select id="touchsplashmenu" onchange="window.open(this.value,'','');">
+        foreach (var book in versions)
+        {
+            @:<option value="/@(book.Location)/index.html">@book.Version</option>
+
+        }
+    @:</select>
+
+} else if(siteData != null){
+  @:<p>No site data?</p>
+} else {
+    @:<p>Books ?</p>
+}
+
+    if(tableOfContents != null){
+            <h1>Inhaltsverzeichniss</h1>
+            @WriteMenue(tableOfContents.Chapters);
         }  
+        @:</nav>
     }
 }
     @RenderBody()

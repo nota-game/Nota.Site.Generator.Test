@@ -103,13 +103,31 @@
             <li class="dropdown"><a href="#">Bücher</a>
                 <ul>
                     @{
-                        var books = Model.Metadata.GetValue<BookMetadata[]>();
+                        var siteData = Model.Metadata.GetValue<SiteMetadata>();
 
+var categorys = siteData.Books.GroupBy(x=>x.BookType).OrderBy(x=>x.Key);
 
-                        foreach (var book in books){
+var firstCategory= true;
+
+foreach (var category in categorys)
+{
+    if(firstCategory){
+        firstCategory = false;
+    } else {
+        @:<li class="seperator"></li>
+    }
+                            foreach (var bookVersions in category.GroupBy(x=>x.Number).OrderBy(x=>x.Key)){
                             
-                            @:<li><a href="/@(book.Location)/index.html">@book.Title</a></li>
+                            var book = bookVersions.First();
+                            var seccondBook = bookVersions.Skip(1).FirstOrDefault();
+                            if(book.Version == BookVersion.VNext && seccondBook != null){
+                                book = seccondBook;
+                            }
+
+                            @:<li><a href="/@(book.Location)/index.html">@(category.Key.ToId())@bookVersions.Key @book.Title - @book.Version</a></li>
                         }
+
+}
 
                     }
 
