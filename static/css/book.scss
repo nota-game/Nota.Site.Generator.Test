@@ -63,6 +63,11 @@ nav.outline {
         margin-left: calc((100% - var(--main-content-width)) / 2);
         margin-right: calc((100% - var(--main-content-width)) / 2)
     }
+    @media (max-width: $smalest-width) {
+        width: unset;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
 }
 
 nav.outline::before {
@@ -137,8 +142,17 @@ main {
             margin-right: calc((100% - var(--main-content-width)) / 2);
         }
 
+        @media (max-width: $smalest-width) {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
         &>:not(aside) {
             width: var(--main-content-width);
+
+            @media (max-width: $smalest-width) {
+                width: unset;
+            }
         }
 
         &>aside {
@@ -176,6 +190,10 @@ main {
                 float: none;
                 width: var(--main-content-width);
                 margin-left: unset;
+            }
+
+            @media (max-width: $smalest-width) {
+                width: unset;
             }
 
             width: calc(var(--info-content-width));
