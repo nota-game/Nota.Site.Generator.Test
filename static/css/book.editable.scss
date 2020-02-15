@@ -1,0 +1,44 @@
+@import "color.scss";
+@import "size.scss";
+
+.edit-box {
+
+    border-top: transparent dashed 1px;
+    border-bottom: transparent dashed 1px;
+
+    &:hover {
+        border-top: var(--secondary-color) dashed 1px;
+        border-bottom: var(--secondary-color) dashed 1px;
+    }
+
+    >a {
+        display: block;
+        grid-row: 1/999;
+        visibility: hidden;
+        float: left;
+        padding: 0.3em 0em;
+        text-align: end;
+
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        width: 2rem !important;
+        margin: 0px;
+        margin-left: -2rem;
+        margin-top: -1px
+            /* the boarder of editbox*/
+        ;
+        position: absolute;
+
+        background-color: var(--secondary-color);
+        color: var(--secondary-inverse-color);
+
+        &::after {
+            transform: rotate(180deg);
+            content: '\270E';
+        }
+    }
+
+    &:hover>a {
+        visibility: visible;
+    }
+}

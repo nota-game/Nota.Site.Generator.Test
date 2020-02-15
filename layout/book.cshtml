@@ -5,9 +5,6 @@
   Layout = @"base.cshtml";
   var backReferences = string.Join("", Model.Id.Where(x=>x == '/').Select(x=> "../"));
 }
-@section Head{
-    <link rel="stylesheet" type="text/css" href="@(backReferences)css/book.css">
-}
 
 @{
     var meta = Model.Metadata.GetValue<BookMetadata>();
@@ -18,6 +15,14 @@
  
     ViewBag.Title = title;
 }
+
+@section Head{
+    <link rel="stylesheet" type="text/css" href="@(backReferences)css/book.css">
+    @if(meta.Version.IsDraft){
+        <link rel="stylesheet" type="text/css" href="@(backReferences)css/book.editable.css">
+    }
+}
+
 
 @section submenue{
     @{
@@ -53,23 +58,33 @@
         @:<nav class="outline">
 
 var siteData = Model.Metadata.TryGetValue<SiteMetadata>();
-    var versions = siteData.Books.Where(x=>x.Title == meta.Title );
-if(versions.Any()){
-
-
-
-    @:<select id="touchsplashmenu" onchange="window.open(this.value,'','');">
+    var versions = siteData.Books.Where(x=>x.Number == meta.Number && meta.BookType == x.BookType);
+if(versions.Count()>1){
+    @:<select class="versionList script" onchange="window.location.assign(this.value);">
         foreach (var book in versions)
         {
-            @:<option value="/@(book.Location)/index.html">@book.Version</option>
-
+            if(book.Version == meta.Version){
+                @:<option value="/@(book.Location)/index.html" selected="selected">@book.Version (@book.Title)</option>
+            }else {
+                @:<option value="/@(book.Location)/index.html">@book.Version (@book.Title)</option>
+            }
         }
     @:</select>
 
-} else if(siteData != null){
-  @:<p>No site data?</p>
+@:<h1 class="noScript" >Versionen</h1>
+    @:<ul class="noScript versionList">
+        foreach (var book in versions)
+        {
+            if(book.Version == meta.Version){
+                @:<li><a href="/@(book.Location)/index.html" selected>@book.Version (@book.Title)</a></li>
+            }else {
+                @:<li><a href="/@(book.Location)/index.html">@book.Version (@book.Title)</a></li>
+            }
+        }
+    @:</ul>
+
 } else {
-    @:<p>Books ?</p>
+    @:<div>@meta.Version (@meta.Title)</div>
 }
 
     if(tableOfContents != null){
