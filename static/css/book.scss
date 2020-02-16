@@ -106,8 +106,9 @@ nav.outline::before {
 }
 
 nav.outline:hover {
-    overflow-y: auto;
-
+    @media (min-width: #{$compact-width}) {
+        overflow-y: auto;
+    }
 }
 
 
