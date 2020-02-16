@@ -33,7 +33,11 @@
             foreach (var entry in entrys)
             {
                 var page = meta.Location + "/"+ entry.Page;
-                var link = System.Uri.EscapeUriString(page) + ".html#" + entry.Id.Replace(" ", "-");
+                var anchorId =entry.Id.Replace(" ", "-");
+                if(string.IsNullOrEmpty(anchorId)){
+                    anchorId = "top";
+                }
+                var link = System.Uri.EscapeUriString(page) + ".html#" + anchorId;
                 var name = entry.Id;
                 if(string.IsNullOrWhiteSpace(name)){
                     name = "Vorwort";
