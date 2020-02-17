@@ -706,6 +706,41 @@ nav.main li.seperator {
 }
 
 
+a.button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--secondary-inverse-color);
+    padding: 8px 32px;
+    margin: 12px 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+    font-size: 16px;
+    border: var(--secondary-color) solid 3px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    
+    &:hover:not(.disabled) {
+        border-color: var(--primary-color);
+    }
+    
+    &.disabled {
+        filter: grayscale(85%) brightness(280%);
+        cursor: default;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    a.button {
+        border-width: 1px;
+    }
+
+    a.button:hover {
+        border-width: 1px;
+    }
+}
+
+
 
 // .settings {
 //     margin-left: var(--outline-width);

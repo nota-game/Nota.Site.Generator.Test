@@ -100,8 +100,30 @@ if(versions.Count()>1){
 }
     @RenderBody()
 
+@{
+    var silblings = Model.Metadata.TryGetValue<SilblingMetadata>();
+    
+    var nextLink = silblings.Next;
+    var previousLink = silblings.Previous;
+
+}
+@section pagination{
+@if(silblings !=null){
+ 
     <nav class="pagination">
-        <a class="button disabled" style="float: left">Zurück</a>
+        @if(previousLink == null) {
+            <a class="button disabled" style="float: left">Zurück</a>
+        } else {
+            <a class="button" href="@previousLink" style="float: left">Zurück</a>
+        }
         <a class="button" href="#top">Top</a>
-        <a class="button" style="float: right;">Weiter</a>
+
+        @if(nextLink == null){
+            <a class="button disabled" style="float: right;">Weiter</a>
+        } else {
+            <a class="button" href="@nextLink" style="float: right">Weiter</a>
+        }
+        
     </nav>
+}
+}

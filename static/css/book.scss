@@ -112,33 +112,6 @@ nav.outline:hover {
 }
 
 
-// @media (max-width: 1400px) {
-//     nav.outline {
-//         display: none;
-//     }
-
-//     #viewOutline:checked~nav.outline {
-//         display: block;
-//         /* position: relative; */
-//         width: 100%;
-//         height: 100%;
-//         overflow: visible;
-//         background-color: var(--main-bg-color);
-//         z-index: 99999;
-//     }
-
-//     #viewOutline:checked~nav.outline~*:not(footer) {
-//         display: none;
-//     }
-// }
-
-// nav.outline>tree-menu {
-//     display: block;
-
-//     padding-right: 2em;
-//     margin-right: 1em;
-//     color: var(--secondary-color);
-// }
 
 nav.outline>*:last-child {
     margin-bottom: 2em;
@@ -287,9 +260,45 @@ main {
 }
 
 
-
 .edit-box {
     >a {
         display: none;
     }
+}
+
+.pagination {
+    text-align: center;
+    
+    
+    width: var(--main-content-width);
+    // margin-left: var(--outline-width);
+
+    // @media (max-width: #{$compact-width}) {
+    //     margin-left: unset;
+    // }
+
+
+    margin-left: calc((100% - var(--main-content-width) - var(--info-content-width) - var(--outline-width)) / 2 + var(--outline-width));
+    margin-right: calc((100% - var(--main-content-width) - var(--info-content-width) - var(--outline-width)) / 2);
+
+    @media (max-width: #{$compact-width}) {
+        margin-left: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+        margin-right: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+    }
+
+    @media (max-width: $narrow-width) {
+        margin-left: calc((100% - var(--main-content-width)) / 2);
+        margin-right: calc((100% - var(--main-content-width)) / 2);
+    }
+
+    @media (max-width: $smalest-width) {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        width: unset;
+    }
+
+
+
+
+
 }
