@@ -245,6 +245,18 @@ main {
                 transform: rotate(180deg);
                 transform-origin: center center;
             }
+
+            table>tbody>tr {
+                background-color: var(--secondary-color);
+                color: var(--secondary-inverse-color);
+            }
+            
+            table>tbody>tr:nth-child(even) {
+                background-color: var(--primary-color);
+                color: var(--primary-inverse-color);
+            }
+
+
         }
 
 
@@ -258,6 +270,9 @@ main {
 
     }
 }
+
+
+
 
 
 .edit-box {
