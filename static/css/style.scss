@@ -1,3 +1,6 @@
+@import "color.scss";
+@import "size.scss";
+
 :root {
     --main-bg-color: #FAF0E6;
     --light-bg-color: #f9f9f9;
@@ -48,16 +51,9 @@ body {
     color: var(--main-txt-color);
     /* overflow: hidden; */
 
-    display: flex;
-    flex-direction: column;
-    height: 100vh; 
  
     &>main {
         margin: 0em;
-        flex: 1 0 auto;
-    }
-    &>:not(main) {
-        flex-shrink: 0; 
     }
     
     &>footer {

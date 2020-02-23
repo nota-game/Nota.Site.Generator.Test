@@ -8,6 +8,8 @@
     --info-main-margin: 16px;
     --outline-width: 320px;
 
+    --edit-box-padding: 1rem;
+
     --compact-width: #{ $info-content-width + $main-content-width + $info-main-margin + $outline-width};
 }
 
@@ -126,20 +128,29 @@ nav.outline>*:last-child {
 main {
     margin-left: var(--outline-width);
 
+
     @media (max-width: #{$compact-width}) {
         margin-left: unset;
     }
 
     // margin-left: (100vw - var(--outline-width)) - (var(--main-content-width) + var(--info-content-width)) / 2;
+    &>.edit-box:last-child {
+        border-bottom: 1px #{$color-primary-0} solid;
 
+    }
     &>.edit-box {
 
-        margin-left: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
-        margin-right: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+        border-left: 1px #{$color-primary-0} solid;
+        border-right: 1px #{$color-primary-0} solid;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        margin-left: calc((100% - var(--main-content-width) - var(--info-content-width) - var(--edit-box-padding) - var(--edit-box-padding) - var(--info-main-margin)) / 2);
+        margin-right: calc((100% - var(--main-content-width) - var(--info-content-width) - var(--edit-box-padding) - var(--edit-box-padding) - var(--info-main-margin)) / 2);
 
         @media (max-width: #{$compact-width}) {
-            margin-left: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
-            margin-right: calc((100% - var(--main-content-width) - var(--info-content-width)) / 2);
+            margin-left: calc((100% - var(--main-content-width) - var(--info-content-width) - var(--edit-box-padding) - var(--edit-box-padding) - var(--info-main-margin)) / 2);
+            margin-right: calc((100% - var(--main-content-width) - var(--info-content-width) - var(--edit-box-padding) - var(--edit-box-padding) - var(--info-main-margin)) / 2);
         }
 
         @media (max-width: $narrow-width) {
@@ -250,7 +261,7 @@ main {
                 background-color: var(--secondary-color);
                 color: var(--secondary-inverse-color);
             }
-            
+
             table>tbody>tr:nth-child(even) {
                 background-color: var(--primary-color);
                 color: var(--primary-inverse-color);
@@ -283,8 +294,8 @@ main {
 
 .pagination {
     text-align: center;
-    
-    
+
+
     width: var(--main-content-width);
     // margin-left: var(--outline-width);
 
