@@ -1,7 +1,7 @@
 ﻿@using Nota.Site.Generator
 @model Stasistium.Documents.IDocument;
 @{
-    var l = Model.Metadata.GetValue<PageLayoutMetadata>()?.Layout;
+    var l = Model.Metadata.TryGetValue<PageLayoutMetadata>()?.Layout;
     if (String.IsNullOrWhiteSpace(l))
     {
         l = @"base.cshtml";

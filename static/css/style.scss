@@ -47,12 +47,30 @@ body {
     background: var(--main-bg-color);
     color: var(--main-txt-color);
     /* overflow: hidden; */
+
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+ 
+    &>main {
+        margin: 0em;
+        flex: 1 0 auto;
+    }
+    &>:not(main) {
+        flex-shrink: 0; 
+    }
+    
+    &>footer {
+        height: var(--footer-height);
+        width: 100%;
+        background-color: var(--secondary-color);
+        z-index: 99999;
+        clear: both;
+        bottom: 0px;
+    }
+
 }
 
-main {
-    margin: 0em;
-
-}
 
 // main>.edit-box>:not(aside) {
 //     width: var(--main-content-width);
@@ -210,12 +228,7 @@ table {
     // }
 }
 
-footer {
-    height: var(--footer-height);
-    background-color: var(--secondary-color);
-    z-index: 999999;
-    clear: both;
-}
+
 
 
 a {
