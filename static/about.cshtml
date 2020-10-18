@@ -1,1 +1,61 @@
+@using Nota.Site.Generator
+@using Nota.Site.Generator.Stages
+
 <p>Test</p>
+
+
+
+ 
+@{
+                        var books = Model.Metadata.TryGetValue<Nota.Site.Generator.LicencedFiles>();
+
+if(books is null){
+<p>No Licenses found</p>
+} else {
+
+
+ @:<ul>
+foreach (var b in books.LicenseInfos)
+{
+
+ @:<li>@(b.Id)
+if(NotaPath.GetExtension(b.Id) == ".png"){
+@:<img src='@(b.Id)' />
+}   
+
+ @:<ul>
+ @:<li>@(b.Metadata)</li>
+ @:<li>@(b.Hash)</li>
+
+ @:<ul>
+
+var xmp = b.Metadata.TryGetValue<XmpMetadata>();
+
+if(xmp != null){
+ @:<li>@(xmp.RightsReserved)</li>
+ @:<li>@(xmp.License)</li>
+ if(xmp.Creators != null){
+ @:<li>@(string.Join(", ", xmp.Creators))</li>
+ }
+
+}
+
+foreach (var key in b.Metadata.Keys)
+{
+
+ @:<li>@(key)</li>
+}
+ @:</ul>
+
+ @:</ul>
+ 
+ @:</li>
+}
+}
+ @:</ul>
+
+} 
+
+<p>LicencedFiles</p>
+
+

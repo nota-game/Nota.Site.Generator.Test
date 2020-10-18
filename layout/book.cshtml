@@ -61,7 +61,7 @@
 
         @:<nav class="outline">
 
-var siteData = Model.Metadata.TryGetValue<SiteMetadata>();
+var siteData = Model.Metadata.GetValue<AllBooksMetadata>();
     var versions = siteData.Books.Where(x=>x.Number == meta.Number && meta.BookType == x.BookType);
 if(versions.Count()>1){
     @:<select class="versionList script" onchange="window.location.assign(this.value);">

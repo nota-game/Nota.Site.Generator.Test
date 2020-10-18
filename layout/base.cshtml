@@ -102,10 +102,23 @@
             <li><a href="#">Home</a></li>
             <li class="dropdown"><a href="#">Bücher</a>
                 <ul>
-                    @{
-                        var siteData = Model.Metadata.GetValue<SiteMetadata>();
+@* 
+@{
+                        var books = Model.Metadata.Keys;
 
-var categorys = siteData.Books.GroupBy(x=>x.BookType).OrderBy(x=>x.Key);
+foreach (var b in books)
+{
+ @:<li>@(b)</li>
+}
+
+} *@
+
+                     @{
+                         var books =Model.Metadata.TryGetValue<AllBooksMetadata>();
+                        if(books != null)
+                            {
+                            
+var categorys = books.Books.GroupBy(x=>x.BookType).OrderBy(x=>x.Key);
 
 var firstCategory= true;
 
@@ -118,9 +131,10 @@ foreach (var category in categorys)
     }
                             foreach (var bookVersions in category.GroupBy(x=>x.Number).OrderBy(x=>x.Key)){
                             
-                            var book = bookVersions.First();
-                            var seccondBook = bookVersions.Skip(1).FirstOrDefault();
-                            if(book.Version == BookVersion.VNext && seccondBook != null){
+                            var book = bookVersions.FirstOrDefault(x => x.Version == BookVersion.VNext)
+                                ?? bookVersions.First();
+                            var seccondBook = bookVersions.FirstOrDefault(x=> !x.Version.IsDraft);
+                            if(book.Version.IsDraft && seccondBook != null){
                                 book = seccondBook;
                             }
 
@@ -128,8 +142,20 @@ foreach (var category in categorys)
                         }
 
 }
+}
+                            else
+                            {
+                      var keys = Model.Metadata.Keys;
 
-                    }
+foreach (var b in keys)
+{
+                            @:<li><a href="#">@(b)</a></li>
+
+}
+                            }
+
+
+                    } 
 
                     <!-- <li><a href="#">Regelwerk</a></li>
                     <li class="seperator"></li>
