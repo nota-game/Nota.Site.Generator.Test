@@ -33,17 +33,16 @@ var xmp = b.Metadata.TryGetValue<XmpMetadata>();
 
 if(xmp != null){
  @:<li>@(xmp.RightsReserved)</li>
- @:<li>@(xmp.License)</li>
+
+if(xmp.License != null){
+
+var sanitizer = new Ganss.XSS.HtmlSanitizer();
+ @:<li>@Html.Raw(sanitizer.Sanitize(xmp.License))</li>
+}
  if(xmp.Creators != null){
  @:<li>@(string.Join(", ", xmp.Creators))</li>
  }
 
-}
-
-foreach (var key in b.Metadata.Keys)
-{
-
- @:<li>@(key)</li>
 }
  @:</ul>
 
