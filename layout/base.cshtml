@@ -189,5 +189,35 @@ foreach (var b in keys)
 
     </footer>
 
+<script>
+    @* document.onload = function(){ *@
+
+    const timecodes = document.getElementsByClassName("timecode");
+    for(let i = 0;i < timecodes.length;i++){
+        const element = timecodes[i];
+        const timeocde = element.getAttribute("timecode");
+        const changeTime = new Date(parseInt(timeocde));
+        const now = new Date();
+
+        const diffSecconds = (now - changeTime)/1000;
+        let txt;
+        if(diffSecconds<60){
+            txt = diffSecconds * " vor einigen Sekunden"
+        } else if ( diffSecconds< 60*5){
+            txt = "vor einigen Minuten"
+        } else if ( diffSecconds< 60 * 60){
+            txt =  "vor weniger als einer Stunde"
+        } else if ( diffSecconds< 60 * 60* 6){
+            txt =  "vor einigen Stunden"
+        }  else if ( diffSecconds< 60 * 60* 24){
+            txt =  "in den letzten 24 Stunden"
+        }   else {
+            txt =  changeTime.toLocaleDateString()
+        } 
+        element.innerHTML = txt;
+    }
+    @* } *@
+</script>
+
 </body>
 </html>
