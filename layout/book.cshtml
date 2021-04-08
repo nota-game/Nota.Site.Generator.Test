@@ -45,8 +45,8 @@
                     name = "Vorwort";
                 }
 
-                @:<li><span>@(entry.Page)</span>
-                    if(page == Model.Id && (entry.Level == 1 || entry.Level == 0)){
+                @:<li><span>@(meta.Location)/@(Model.Id)</span>
+                    if(page == (meta.Location + "/" + Model.Id) && (entry.Level == 1 || entry.Level == 0)){
                         @:<a href="@(backReferences)@link" class="selected" >@name</a>
                     }
                     else
