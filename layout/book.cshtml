@@ -26,8 +26,8 @@
 
 @section submenue{
     @{
-    @:<p>@(Model.Id)</p> href="@(backReferences)@link" class="selected" >@name</a>
-
+    @:<p>@(Model.Id)</p> 
+    
     Func<IEnumerable<TableOfContentsEntry>, Microsoft.AspNetCore.Html.IHtmlContent> WriteMenue = null;
     WriteMenue = @<text>@{
             var entrys = item;
