@@ -7,7 +7,7 @@
 
  
 @{
-                        var books = Model.Metadata.TryGetValue<Nota.Site.Generator.LicencedFiles>();
+                        var books = Model.Metadata.TryGetValue<LicencedFiles>();
 
 if(books is null){
 <p>No Licenses found</p>
@@ -19,15 +19,30 @@ foreach (var b in books.LicenseInfos)
 {
 
  @:<li>@(b.Id)
-if(NotaPath.GetExtension(b.Id) == ".png"){
+if(Nota.IsImage(b.Id) ){
 @:<img src='@(b.Id)' />
 }   
 
  @:<ul>
- @:<li>@(b.Metadata)</li>
- @:<li>@(b.Hash)</li>
+
+var references = b.Metadata.TryGetValue<ImageReferences>();
+    if(references != null){
+
+ @:<li><ul>
+
+foreach (var r in references.References)
+{
+ @:<li>@(r.ReferencedId)</li>
+ @:<li> <a href="@(r.Document)#@(r.Header)">@(r.Header ?? r.Document)</a></li>
+ @:<li></li>
+    
+}
+
+
+ @:</ul></li>
 
  @:<ul>
+    }
 
 var xmp = b.Metadata.TryGetValue<XmpMetadata>();
 
@@ -36,8 +51,8 @@ if(xmp != null){
 
 if(xmp.License != null){
 
-var sanitizer = new Ganss.XSS.HtmlSanitizer();
- @:<li>@Html.Raw(sanitizer.Sanitize(xmp.License))</li>
+
+ @:<li>@Html.Raw(Nota.Sanitize(xmp.License))</li>
 }
  if(xmp.Creators != null){
  @:<li>@(string.Join(", ", xmp.Creators))</li>
