@@ -45,7 +45,7 @@
                 }
 
                 @:<li>
-                    @:<span>(@(page) + ".html") == @(Model.Id)</span>
+                    @* @:<span>(@(page) + ".html") == @(Model.Id)</span> *@
                     if((page + ".html") ==  Model.Id && (entry.Level == 1 || entry.Level == 0)){
                         @:<a href="@(backReferences)@link" class="selected" >@name</a>
                     }
