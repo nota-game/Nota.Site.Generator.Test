@@ -27,6 +27,7 @@
 @section submenue{
     @{
     @:<p>@(Model.Id)</p> 
+    @:<p>@(meta.Location)</p> 
 
     Func<IEnumerable<TableOfContentsEntry>, Microsoft.AspNetCore.Html.IHtmlContent> WriteMenue = null;
     WriteMenue = @<text>@{
@@ -45,7 +46,8 @@
                     name = "Vorwort";
                 }
 
-                @:<li><span>@(meta.Location)/@(Model.Id)</span>
+                @:<li><span>@(meta.Location)/@(entry.Id)</span>
+                @:<span>@(page) == (@(meta.Location) + "/" + @(Model.Id) )</span>
                     if(page == (meta.Location + "/" + Model.Id) && (entry.Level == 1 || entry.Level == 0)){
                         @:<a href="@(backReferences)@link" class="selected" >@name</a>
                     }
