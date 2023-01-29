@@ -1,8 +1,18 @@
 {
-  "ContentRepo": "C:\\Users\\patri\\source\\repos\\nota-game\\Nota.Site.Generator.Test\\remoteGit\\content",
+  "ContentRepo": {
+    "Url": "./../nota-content-bare",
+    "PrimaryBranchName": "master"
+  },
   // "ContentRepo": "https://github.com/nota-game/nota.git",
-  "SchemaRepo": "C:\\Users\\patri\\source\\repos\\nota-game\\Nota.Site.Generator.Test\\remoteGit\\schema",
-  "Layouts": "layout",
-  "Host": "https://nota-game2.azurewebsites.net",
-  "WebsiteRepo": "C:\\Users\\patri\\source\\repos\\nota-game\\Nota.Site.Generator.Test\\remoteGit\\target"
+  "SchemaRepo": {
+    "Url": "C:\\Users\\patri\\source\\repos\\nota-game\\Nota.Site.Generator.Test\\remoteGit\\schema",
+    "PrimaryBranchName": "master"
+  },
+  "Layouts": "./../nota-game.github.io/layout",
+  "StaticContent": "./../nota-game.github.io/static",
+  "Host": "https://nota-game.github.io",
+  "WebsiteRepo": {
+    "Url": "C:\\Users\\patri\\source\\repos\\nota-game\\Nota.Site.Generator.Test\\remoteGit\\target",
+    "PrimaryBranchName": "master"
+  }
 }
